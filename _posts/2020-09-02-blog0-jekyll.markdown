@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: "Downloading Go and writing a simple 'Hello World' program (Windows)"
 date: 2020-09-02 17:38:00 -0700
 ---

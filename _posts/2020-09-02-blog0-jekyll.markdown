@@ -8,7 +8,7 @@ For Blog 0 I will be explaining on how to download Go (GoLang) on a Windows mach
 
 ====> Now. I shall dive in on how to download Go in your Window's OS environment:
 
-1) Visit [Go's Download Page][golang-download] and click on the Microsoft Windows option. This should launch an msi file ad if not, directly go into your downloads folder and run the Go .msi file.
+1) Visit [Go's Download Page][golang-download] and click on the Microsoft Windows option. This should launch an msi file and if not, directly go into your downloads folder and run the Go .msi file.
 
 2) After you follow the window prompt, it's good to confirm that it was successfully downloaded. Open up Command Prompt and run the following command `go version`. If all goes well, you should get a response of something along the lines of `go version go1.15.1 windows/amd64`
 
@@ -16,11 +16,11 @@ For Blog 0 I will be explaining on how to download Go (GoLang) on a Windows mach
 
 1) Create a folder in your Desktop directory called `GoSample`
 
-2) Open up the `GoSample` older using a text editor of your choice
+2) Open up the `GoSample` folder using a text editor of your choice
 
 3) In the text editor create a file called `hello.go` in the `GoSample` directory.
 
-4) Within that file type the following:
+4) Within that file type the following lines of code:
 {% highlight ruby %}
 package main
 
@@ -31,7 +31,7 @@ func main() {
 }
 {% endhighlight %}
 
-5) Save the file. Open up the command prompt and run the following command `go run hello.go` . Some things to keep in mind is to run this command while inside the `GoSample` directory. You should get a response that looks like:
+5) Save the file. Open up the command prompt and run the following command `go run hello.go` . One thing to keep in mind is to run this command while inside the `GoSample` directory. You should get a response that looks like:
 {% highlight ruby %}
 PS C:\Users\Path\to\directory\: go run hello.go
 Hello World!

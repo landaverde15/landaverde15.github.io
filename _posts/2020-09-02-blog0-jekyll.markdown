@@ -2,7 +2,6 @@
 layout: default
 title: "Downloading Go and writing a simple 'Hello World' program (Windows)"
 date: 2020-09-02 17:38:00 -0700
-categories: jekyll update
 ---
 For Blog 0 I will be explaining on how to download Go (GoLang) on a Windows machine. But, before I dive in, I will quickly explain what Go is and where it came from. Go is a programming language that over the past 5 years has been on the rise amongst developers and corporate companies for its simplicity and high-level efficiency. Go is continuously developed and maintained by Google.
 

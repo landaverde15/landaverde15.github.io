@@ -1,2 +1,2 @@
-# landaverde15.gituhub.io
+# landaverde15.github.io
 CSUN Senior Design 480

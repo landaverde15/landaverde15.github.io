@@ -15,7 +15,7 @@ For Blog 0 I will be explaining on how to download Go (GoLang) on a Windows mach
 2) Open up the `GoSample` older using a text editor of your choice
 3) In the text editor create a file called `hello.go` in the `GoSample` directory.
 4) Within that file type the following
-{%
+{% highlight ruby %}
 package main
 
 import "fmt"
@@ -23,13 +23,13 @@ import "fmt"
 func main() {
     fmt.Println("Hello World!")
 }
-%}
+{% endhighlight %}
 
 5) Save the file. Open up the command prompt and run the following command `go run hello.go` . Some things to keep in mind is to run this command while inside the `GoSample` directory. You should get a response that looks like:
-{%
+{% highlight ruby %}
 PS C:\Users\Path\to\directory\: go run hello.go
 Hello World!
-%}
+{% endhighlight %}
 
 In another blog post I will explain what each line in the code means.
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "What are package managers and their components?"
-date: 2020-09-18 09:00:00 -0700
+date: 2020-09-16 09:00:00 -0700
 ---
 For Blog 2 I will write about package managers. The reason I decided to write and explain about package managers is because of a new project I was given this week at work. The requirements for the project specified that it had to be written in React JS. I lightly touched React JS about 2 years ago but it wasn't at a level where I can consider myself a React Developer. When I looked at the docs and created a simple React app 2 years ago I remember that the package manager was `Node Package Manager (NPM)`. This week when I started the project at work and generated a React template I noticed I kept getting some red text in the command prompt about using/installing `Yarn`, which is another package manager. 
 

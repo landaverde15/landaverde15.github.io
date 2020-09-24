@@ -12,12 +12,12 @@ I've always used Visual Studio Code as a text editor/IDE for all the development
 ===> React Developer Tools (Chrome Extension)
 
 This extension was created by Facebook and to be honest it's a nice little tool to have. For the developers that like using the inspect feature for chrome, this extensions adds tabs for the HTML elements for your components/styling. The reason I like to use this tool is because it helps me to debug issues for individual components. You can download [here][react-chrome-ex]
-![react chrome extension](/assets/ss1.png)
+![react chrome extension]({{site.url}}/assets/ss1.png)
 
 ===> ES7 React/Redex/GraphQL... (VS Code Extension)
 
 This nice to have extension for VS Code is very helpful. The reason I really enjoy this tool is because it allows for nice code snippets that help during development. In simple terms, it provides the option for short cuts when coding. For instance, typing the following prefix `imr→` will type out `import React from 'react'` automatically for you. This extension provides many prefix snippets to make your react development a breeze.
-![react extension vscode](/assets/ss2.png)
+![react extension vscode]({{site.url}}/assets/ss2.png)
 
 ===> npx create-react-app (NPM module)
 

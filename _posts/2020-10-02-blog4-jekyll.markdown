@@ -3,7 +3,7 @@ layout: post
 title: "Using Chart.js"
 date: 2020-10-02 07:00:00 -0700
 ---
-![chart js photo](/assets/chartjs.PNG)
+![chart js site photo](/assets/chartjs.PNG)
 
 Have you ever had a project/assignment/client job where you were required to dynamically display data using graphs? Well, in my early days of development (3 years ago lol), I would manually build basic graphs using HTML, CSS, and JavaScript. During my early days of development I had no experience with packages, NPM, Node, etc. After years of experience I have found an excellent tool to display data via charts, graphs, you name it.
 

@@ -19,24 +19,24 @@ I think it is important to first go over what is the Amazon Web Services Command
  accordingly <br>
 ------------------------------------------------------------------------------------ <br>
 
------------------------------------------------------------------------------------- \n
-**Run command**: \n
-`sudo yum install aws cli` \n 
-**Explanation**: \n
--Depending on your linux distro for your instance you would install the AWS CLI. The \n   
- above command works for a CentOS Linux distro instance \n
------------------------------------------------------------------------------------- \n
+------------------------------------------------------------------------------------ <br>
+**Run command**: <br>
+`sudo yum install aws cli` <br>
+**Explanation**: <br>
+-Depending on your linux distro for your instance you would install the AWS CLI. The <br>
+ above command works for a CentOS Linux distro instance <br>
+------------------------------------------------------------------------------------ <br>
 
------------------------------------------------------------------------------------- \n
-**Run command**: \n
-`aws --version` \n
-**Explanation**: \n
--This is to check that the AWS CLI was successfully installed \n
------------------------------------------------------------------------------------- \n
+------------------------------------------------------------------------------------ <br>
+**Run command**: <br>
+`aws --version` <br>
+**Explanation**: <br>
+-This is to check that the AWS CLI was successfully installed <br>
+------------------------------------------------------------------------------------ <br>
 
-From here on out you can access all your AWS services. For Lab 4 we had to make some configurations to our S3 buckets. I did this by running the following command: \n
-`aws s3api list-buckets --query "Buckets[].Name"` \n 
-The following is the actual response I get from my instance: \n
+From here on out you can access all your AWS services. For Lab 4 we had to make some configurations to our S3 buckets. I did this by running the following command: <br>
+`aws s3api list-buckets --query "Buckets[].Name"` <br>
+The following is the actual response I get from my instance: <br>
 {% highlight ruby %}
 [
     "cit480"

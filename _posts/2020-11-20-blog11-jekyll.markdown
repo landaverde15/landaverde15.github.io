@@ -1,0 +1,31 @@
+---
+layout: post
+title: "JSONPlaceholder"
+date: 2020-11-20 10:10:00 -0700
+---
+There is a nice tool that I discovered online for development that is really helpful. In simple terms JSONPlaceholder is like a mock JSON server. For instance if I've got an app already created with no back end (server requests), I can post up some JSON data into JSONPlaceholder and make sample requests from my app. 
+
+For me this was always helpful since I only had a cloud shared space. To post server side language in my shared space was never possible and I was required to pay for my own dedicated space. I did not want this so JSONPlaceholder was a great alternative because I could make requests to it with JavaScript.
+
+The simple steps include the following:
+
+1) Mock up some sample JSON data like the following:
+
+{% highlight ruby %}
+{
+    firstName: "Erik",
+    lastName: "Landaverde",
+    age: "24",
+    blogNumber: 11
+}
+{% endhighlight %}
+
+2) Create a GitHub account and create a repository
+
+3) Place your json file inside the repository and make sure to name it as db.json
+
+4) Inside your app make an HTTP request to the URL of your json file. The format would be the following: `https://my-json-server.typicode.com/<your-username>/<your-repo>`
+
+Hopefully you found this useful to use for your development to make instant requests to fake data.
+
+Hack On!

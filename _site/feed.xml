@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-04-22T21:56:47-07:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Your awesome title</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Using compenentDidMount and componentDidUpdate in ReactJS</title><link href="http://localhost:4000/2021/04/16/blog7-jekyll.html" rel="alternate" type="text/html" title="Using compenentDidMount and componentDidUpdate in ReactJS" /><published>2021-04-16T10:10:00-07:00</published><updated>2021-04-16T10:10:00-07:00</updated><id>http://localhost:4000/2021/04/16/blog7-jekyll</id><content type="html" xml:base="http://localhost:4000/2021/04/16/blog7-jekyll.html">&lt;p&gt;These are 2 functions that I have found important in my continuous learning in development in ReactJS. componentDidMount and componentDidUpdate. In the last blog post I spoke about state. To quickly summarize the last blog post - state are variables passed from parent components down to child components. Now this is very important because what if the parent receives new data and it needs to send it down to its child components. What is nice about ReactJS is that the Document Object Model (DOM) can be updated without refreshing the whole browser tab. So, how are these 2 functions important?&lt;/p&gt;
+
+&lt;p&gt;I’m going to explain their importance with a made up scenario. Let’s say that in the initial load of our landing page, some data is fetched and then loaded onto the DOM. In this phase of the lifecycle we would use the componentDidMount() to load our data into the state of the component. Something like below:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;    &lt;span class=&quot;n&quot;&gt;componentDidMount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Landing Page component has mounted&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+            &lt;span class=&quot;ss&quot;&gt;data: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fetchedData&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see above that as soon as our page loaded we are loading data into our state. Right when the component mounts onto the DOM we fetch the data. What if without refreshing the page, the data changes? How will the children components receive this updated data? We would then use componentDidUpdate(), something like below:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;    &lt;span class=&quot;n&quot;&gt;componentDidUpdate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;previousProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;previousProps&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newProps&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+                &lt;span class=&quot;ss&quot;&gt;data: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;fetchedUpdatedData&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see above componentDidUpdate() compares the old data with the new data. If the data has changed, then we want to load the new data into the components state.&lt;/p&gt;</content><author><name></name></author><summary type="html">These are 2 functions that I have found important in my continuous learning in development in ReactJS. componentDidMount and componentDidUpdate. In the last blog post I spoke about state. To quickly summarize the last blog post - state are variables passed from parent components down to child components. Now this is very important because what if the parent receives new data and it needs to send it down to its child components. What is nice about ReactJS is that the Document Object Model (DOM) can be updated without refreshing the whole browser tab. So, how are these 2 functions important?</summary></entry><entry><title type="html">Tips on using State in ReactJS</title><link href="http://localhost:4000/2021/04/09/blog6-jekyll.html" rel="alternate" type="text/html" title="Tips on using State in ReactJS" /><published>2021-04-09T10:10:00-07:00</published><updated>2021-04-09T10:10:00-07:00</updated><id>http://localhost:4000/2021/04/09/blog6-jekyll</id><content type="html" xml:base="http://localhost:4000/2021/04/09/blog6-jekyll.html">&lt;p&gt;ReactJS is an extremely nice front end library (not a framework). What’s is so cool about ReactJS is the customization of components and the use of state. So what is exactly is state?
+State are variables that are managed by a component. Props in the other hand are variables passed in from a parent component to a child component. This is neat because a parent component can make a fetch to an external API and the child component can receive the props or data and populate the DOM with the data. So how does this look in React code?&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;    &lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Blog6ParentComponent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;React&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;component&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;constructor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;state&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;sampleData&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;dataFromExternalParent&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Blog6ChildComponent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sampleData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;As you can see in the code above, state is initialized within the constructor method. Then the value for the state variables are props (or in easier terms variables passed in from parent). Then when props get saved into the state, state data can be passed into child components as well. One important thing to note is that passing data in ReactJS has only 1 directions. From parents to children, and NOT children to parent. So if data gets updated in the child component and the child component wants to return the updated data to the parent it cannot do this. There are other forms of doing this which will be discussed in another blog.&lt;/p&gt;</content><author><name></name></author><summary type="html">ReactJS is an extremely nice front end library (not a framework). What’s is so cool about ReactJS is the customization of components and the use of state. So what is exactly is state? State are variables that are managed by a component. Props in the other hand are variables passed in from a parent component to a child component. This is neat because a parent component can make a fetch to an external API and the child component can receive the props or data and populate the DOM with the data. So how does this look in React code?</summary></entry><entry><title type="html">Performing fetch in ReactJS</title><link href="http://localhost:4000/2021/03/26/blog4-jekyll.html" rel="alternate" type="text/html" title="Performing fetch in ReactJS" /><published>2021-03-26T10:10:00-07:00</published><updated>2021-03-26T10:10:00-07:00</updated><id>http://localhost:4000/2021/03/26/blog4-jekyll</id><content type="html" xml:base="http://localhost:4000/2021/03/26/blog4-jekyll.html">&lt;p&gt;For blog 4 I’ve decided to explain on making an HTTP fetch call via ReactJS. How did I come up with this idea for this blog? Well originally I had planned to create out groups web application in GoLang, however, as I started developing the web app I approached several hurdles. Since I don’t have experience with GoLang I decided to abandon that idea and create the web app in ReactJS which is the day to day language I use at work. To understand this blog it is expected to have atleast a beginner level knowledge on ReactJS.&lt;/p&gt;
+
+&lt;p&gt;The most common cases to make an HTTP request would be in your initial page load state of your application, so the data can be fetched and then displayed in the DOM. In React this would be performed inside the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;componentDidMount()&lt;/code&gt; function of the component. In earlier versions of React it could’ve also been done in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;componentWillMount()&lt;/code&gt;, however that function is now heavily recommended NOT to use and will probably be deprecated.&lt;/p&gt;
+
+&lt;p&gt;Performing the fetch within &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;componentDidMount()&lt;/code&gt; will look something like this. For purposes of this blog I will make a request to a sample candy store API:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;    &lt;span class=&quot;n&quot;&gt;componentDidMount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;fetch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;http://candy.api.com/candies&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;json&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;then&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;If this API were real and the fetch were successful we should expect something like the following:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;snickers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;kitkat&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;butterfingers&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;jolly rancher&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Simple as that we can make an HTTP request. Now you say what is the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;then()&lt;/code&gt; attached to the fetch function. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;then()&lt;/code&gt; is from the Promise API. It is used to deal with asynchronous tasks like in this case the API call. When the candy API responds, the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;then()&lt;/code&gt; allows developers to specify what to do right after the previous function has executed and completed. In the sample above we are console logging the result.&lt;/p&gt;</content><author><name></name></author><summary type="html">For blog 4 I’ve decided to explain on making an HTTP fetch call via ReactJS. How did I come up with this idea for this blog? Well originally I had planned to create out groups web application in GoLang, however, as I started developing the web app I approached several hurdles. Since I don’t have experience with GoLang I decided to abandon that idea and create the web app in ReactJS which is the day to day language I use at work. To understand this blog it is expected to have atleast a beginner level knowledge on ReactJS.</summary></entry><entry><title type="html">Setting up a simple GoLang server</title><link href="http://localhost:4000/2021/02/26/blog13-jekyll.html" rel="alternate" type="text/html" title="Setting up a simple GoLang server" /><published>2021-02-26T09:10:00-08:00</published><updated>2021-02-26T09:10:00-08:00</updated><id>http://localhost:4000/2021/02/26/blog13-jekyll</id><content type="html" xml:base="http://localhost:4000/2021/02/26/blog13-jekyll.html">&lt;p&gt;This week I started to work on my group project. As mentioned in previous blog post, our group will be creating a web application that will serve the top performing crypto currencies and stocks. For our applicaiton I decided to create the back end in GoLang. Why? Simply because it’s a language that is growing in popularity + demand in the real world. So why not use this opportunity and dive into it?&lt;/p&gt;
+
+&lt;p&gt;To create a Go server, your application will rely on the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net/http&lt;/code&gt; package. This package provides HTTP client and server implementations. For the purpose of my group project the most important line for my Go file is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;log.Fatal(http.ListenAndServe(&quot;:8080&quot;, nil))&lt;/code&gt;. ListenAndServe starts an HTTP server with a given address and handler. In that piece of code I wrapped my ListenAndServe with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;log.Fatal&lt;/code&gt; which is simply a logging package. Anything that goes wrong with our server, it will be logged (hence the wrapper log.Fatal).&lt;/p&gt;
+
+&lt;p&gt;The rest of the file is up to you. In my case for our group project, we will have to routes or paths which is one for crypto and the other for stocks. As a sample this is how you write the listener for the crypto path.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http.HandleFunc(&quot;/crypto&quot;, func(w httpResponseWriter, r *http.Request) {fmt.Fprintf(w, &quot;HTML HERE&quot;)})&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;In the sample above, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http&lt;/code&gt; is the instance of the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;net/http&lt;/code&gt; package. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HandleFunc&lt;/code&gt; handles to the response to the server path of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;http://localhost:8080/crypto&lt;/code&gt; and it serves the specified html to the page.&lt;/p&gt;
+
+&lt;p&gt;Hope this simple Go tutorial was helpful!&lt;/p&gt;</content><author><name></name></author><summary type="html">This week I started to work on my group project. As mentioned in previous blog post, our group will be creating a web application that will serve the top performing crypto currencies and stocks. For our applicaiton I decided to create the back end in GoLang. Why? Simply because it’s a language that is growing in popularity + demand in the real world. So why not use this opportunity and dive into it?</summary></entry><entry><title type="html">Building An Idea For Our Project</title><link href="http://localhost:4000/2021/02/18/blog12-jekyll.html" rel="alternate" type="text/html" title="Building An Idea For Our Project" /><published>2021-02-18T09:10:00-08:00</published><updated>2021-02-18T09:10:00-08:00</updated><id>http://localhost:4000/2021/02/18/blog12-jekyll</id><content type="html" xml:base="http://localhost:4000/2021/02/18/blog12-jekyll.html">&lt;p&gt;This is blog 1 of Spring semester course CIT481. I have not really done anything technical this week so I decided to dedicate this blog toward the idea for the group project and the tech stack we will be using.&lt;/p&gt;
+
+&lt;p&gt;I came out with the project idea of creating an application that renders top performing stocks and crypto currencies. How did I come out with this idea? Well because there is no better time than now to invest in stocks and crypto amidst the scandal with GameStop stock and Doge Coin.&lt;/p&gt;
+
+&lt;p&gt;The tech stack we will be using for this application is the following:&lt;/p&gt;
+
+&lt;p&gt;=====&amp;gt; Front End
+       - Vanilla JS / HTML / CSS&lt;/p&gt;
+
+&lt;p&gt;=====&amp;gt; Back End
+       - JavaScript AJAX requests to retrieve data&lt;/p&gt;
+
+&lt;p&gt;=====&amp;gt; API 
+       - RapidAPI = a tool that contains thousands of API’s for different types of data&lt;/p&gt;
+
+&lt;p&gt;For the project stack we decided to keep it simple. We didn’t want to make it too complex that we don’t have a working application to present at the end of the semester. If time permits and the group shows improvement throughout the weeks we will possibly build a simple back end in GoLang to handle the API requests and create an improved slick front end using ReactJS.&lt;/p&gt;
+
+&lt;p&gt;Thank you,&lt;/p&gt;
+
+&lt;p&gt;Erik&lt;/p&gt;</content><author><name></name></author><summary type="html">This is blog 1 of Spring semester course CIT481. I have not really done anything technical this week so I decided to dedicate this blog toward the idea for the group project and the tech stack we will be using.</summary></entry><entry><title type="html">JSONPlaceholder</title><link href="http://localhost:4000/2020/11/20/blog11-jekyll.html" rel="alternate" type="text/html" title="JSONPlaceholder" /><published>2020-11-20T09:10:00-08:00</published><updated>2020-11-20T09:10:00-08:00</updated><id>http://localhost:4000/2020/11/20/blog11-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/11/20/blog11-jekyll.html">&lt;p&gt;There is a nice tool that I discovered online for development that is really helpful. In simple terms JSONPlaceholder is like a mock JSON server. For instance if I’ve got an app already created with no back end (server requests), I can post up some JSON data into JSONPlaceholder and make sample requests from my app.&lt;/p&gt;
+
+&lt;p&gt;For me this was always helpful since I only had a cloud shared space. To post server side language in my shared space was never possible and I was required to pay for my own dedicated space. I did not want this so JSONPlaceholder was a great alternative because I could make requests to it with JavaScript.&lt;/p&gt;
+
+&lt;p&gt;The simple steps include the following:&lt;/p&gt;
+
+&lt;p&gt;1) Mock up some sample JSON data like the following:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;firstName: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Erik&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;lastName: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;Landaverde&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;age: &lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;24&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;blogNumber: &lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;2) Create a GitHub account and create a repository&lt;/p&gt;
+
+&lt;p&gt;3) Place your json file inside the repository and make sure to name it as db.json&lt;/p&gt;
+
+&lt;p&gt;4) Inside your app make an HTTP request to the URL of your json file. The format would be the following: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;https://my-json-server.typicode.com/&amp;lt;your-username&amp;gt;/&amp;lt;your-repo&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Hopefully you found this useful to use for your development to make instant requests to fake data.&lt;/p&gt;
+
+&lt;p&gt;Hack On!&lt;/p&gt;</content><author><name></name></author><summary type="html">There is a nice tool that I discovered online for development that is really helpful. In simple terms JSONPlaceholder is like a mock JSON server. For instance if I’ve got an app already created with no back end (server requests), I can post up some JSON data into JSONPlaceholder and make sample requests from my app.</summary></entry><entry><title type="html">Adding a new Host Entry in Docker</title><link href="http://localhost:4000/2020/11/13/blog10-jekyll.html" rel="alternate" type="text/html" title="Adding a new Host Entry in Docker" /><published>2020-11-13T06:00:00-08:00</published><updated>2020-11-13T06:00:00-08:00</updated><id>http://localhost:4000/2020/11/13/blog10-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/11/13/blog10-jekyll.html">&lt;p&gt;For this blog post I thought about writing about an issue I had at work this week and then explain some solutions I found to my problem.&lt;/p&gt;
+
+&lt;p&gt;A team of 3 engineers and myself are working on rewriting services. The services that we are writing/developing are being hosted on AWS within a Docker container. Some of the services we write are easy. However, this week we were faced with a challenge. Or atleast I was since I haven’t had much exposure. I had to write a service in Java that would make a request to internal services at my job. The internal network at my job has firewalls which meant the networking team had to give access and then i’d be able to connect to our middleware and make the requests to our inhouse services. I was told to add a hostname entry to the docker file so it could recognize the domain name for our internal network.&lt;/p&gt;
+
+&lt;p&gt;What the heck!&lt;/p&gt;
+
+&lt;p&gt;I don’t know what a host file is, i dont know what a hostname is, i dont know where the host file is even located. After doing some research I became informed and found 2 solutions. I will show and explain 2 methods to adding a hostname entry into a hostfile for docker.&lt;/p&gt;
+
+&lt;p&gt;====&amp;gt; Method 1&lt;/p&gt;
+
+&lt;p&gt;We can add a hostname entry via the dockerfile with the following code:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;FROM&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;adoptopenjdk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;openjdk11&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;openj9&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;VOLUME&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/d/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tmp&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ARG&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;JAR_FILE&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ADD&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;JAR_FILE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;jar&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;EXPOSE&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;9154&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;ENTRYPOINT&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'/bin/sh'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'-c'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'echo 199.000.12.11 mpveaf.kinecta.org &amp;gt;&amp;gt; /etc/hosts &amp;amp;&amp;amp; exec java -Djava.security.egd=file:/dev/./urandom -jar /app.jar'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Where the magic is done is the last line with the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ENTRYPOINT&lt;/code&gt;. Here I configure the container to run as an executable. I pass in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo 199.000.12.11 mpveaf.kinecta.org &amp;gt;&amp;gt; /etc/hosts&lt;/code&gt; as a parameter. Basically Im writing into the hostfile the entry I need to make. This method is used on non-cloud platforms as well.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; Method 2&lt;/p&gt;
+
+&lt;p&gt;This method I was not able to perform at my job but would have made things much easier. Simply using the following command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo docker run --add-host host1.test.com:192.168.0.1 --add-host host2.test.com:192.168.0.2 -ti source_container_image /bin/bash&lt;/code&gt;. On running the docker container you’re able to add arguments to manually add the host entry into the hostfile.&lt;/p&gt;
+
+&lt;p&gt;Both methods work great depending if you have access to the execution in the terminal/command prompt. Since I did not have access, I could only provide a dockerfile along with the java code and method 1 worked like a charm.&lt;/p&gt;
+
+&lt;p&gt;Hope this helped. Hack on!&lt;/p&gt;</content><author><name></name></author><summary type="html">For this blog post I thought about writing about an issue I had at work this week and then explain some solutions I found to my problem.</summary></entry><entry><title type="html">Using AWS CLI</title><link href="http://localhost:4000/2020/11/05/blog8-jekyll.html" rel="alternate" type="text/html" title="Using AWS CLI" /><published>2020-11-05T06:00:00-08:00</published><updated>2020-11-05T06:00:00-08:00</updated><id>http://localhost:4000/2020/11/05/blog8-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/11/05/blog8-jekyll.html">&lt;p&gt;Hello everyone! For this week’s blog post I will touch a little on AWS CLI. This week’s Lab was about setting up an EC2 instance and running an Apache server on it and rendering a custom HTML page. I have to say I really enjoyed this lab. It surprised me because networking is not my area of interest. To be quite honest I find it a bit boring. My area of interest in the computer science realm is software development. Anyway, after completing this lab it was really surprising to me that I had actually set up an EC2 instance in the cloud and I connected to it via my local laptop through the command prompt. That amazed me. Now, I will get into how I interacted with my EC2 instance that is in the cloud via my local laptop using the AWS CLI.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; What is AWS CLI?
+I think it is important to first go over what is the Amazon Web Services Command Line Interface (AWS CLI). AWS CLI is a tool to manage your AWS services. By downloading the AWS CLI you can configure and control multiple services from your command line. The steps would look something like:
+————————————————————————————
+&lt;strong&gt;Run command&lt;/strong&gt;:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ssh -i &quot;cit480.pem&quot; ec2-user@ec0-0-000-000-00.us-east-2.compute.amazonaws.com&lt;/code&gt;
+&lt;strong&gt;Explanation&lt;/strong&gt;:
+-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cit480.pem&lt;/code&gt; = your private key
+-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ec2-user&lt;/code&gt; = user in instance
+-&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@ec0-0-000-000-00.us-east-2.compute.amazonaws.com&lt;/code&gt; = Your public IPV4 DNS
+-You may be prompted some questions after running the above command so answer
+accordingly
+————————————————————————————&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Run command&lt;/strong&gt;:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo yum install aws cli&lt;/code&gt; 
+&lt;strong&gt;Explanation&lt;/strong&gt;:
+-Depending on your linux distro for your instance you would install the AWS CLI. The     above command works for a CentOS Linux distro instance
+————————————————————————————&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Run command&lt;/strong&gt;:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws --version&lt;/code&gt;
+&lt;strong&gt;Explanation&lt;/strong&gt;:
+-This is to check that the AWS CLI was successfully installed
+————————————————————————————&lt;/p&gt;
+
+&lt;p&gt;From here on out you can access all your AWS services. For Lab 4 we had to make some configurations to our S3 buckets. I did this by running the following command:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;aws s3api list-buckets --query &quot;Buckets[].Name&quot;&lt;/code&gt;
+The following is the actual response I get from my instance:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+    &lt;span class=&quot;s2&quot;&gt;&quot;cit480&quot;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;With AWS CLI you can manage literally everything. Since I’ve only consumed EC2 + S3 services, those are the only commands I know. In a future blog post I will get into other services.&lt;/p&gt;
+
+&lt;p&gt;Hack on!&lt;/p&gt;</content><author><name></name></author><summary type="html">Hello everyone! For this week’s blog post I will touch a little on AWS CLI. This week’s Lab was about setting up an EC2 instance and running an Apache server on it and rendering a custom HTML page. I have to say I really enjoyed this lab. It surprised me because networking is not my area of interest. To be quite honest I find it a bit boring. My area of interest in the computer science realm is software development. Anyway, after completing this lab it was really surprising to me that I had actually set up an EC2 instance in the cloud and I connected to it via my local laptop through the command prompt. That amazed me. Now, I will get into how I interacted with my EC2 instance that is in the cloud via my local laptop using the AWS CLI.</summary></entry><entry><title type="html">Understanding Docker</title><link href="http://localhost:4000/2020/10/22/blog7-jekyll.html" rel="alternate" type="text/html" title="Understanding Docker" /><published>2020-10-22T07:00:00-07:00</published><updated>2020-10-22T07:00:00-07:00</updated><id>http://localhost:4000/2020/10/22/blog7-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/10/22/blog7-jekyll.html">&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/docker.png&quot; alt=&quot;docker img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Before CIT480, I had only heard the word Docker but I were lying to you if I told you I knew what Docker was. The only thing I knew was that Docker had something to do with containers, which in reality I had no idea what containers were either.&lt;/p&gt;
+
+&lt;p&gt;After doing some research and having to get my hands dirty with Docker in this course here is what I have learned:&lt;/p&gt;
+
+&lt;p&gt;1) What docker is
+2) What a container is
+3) What a docker file is&lt;/p&gt;
+
+&lt;p&gt;I will quickly walk through each of these topics for those who still can’t grasp the idea of what Docker is.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; What is Docker?&lt;/p&gt;
+
+&lt;p&gt;To make this easy to understand I’m going to use an example. Let’s say I have 3 GoLang applications that all use different versions of GoLang. Since I cannot have different versions of GoLang on my laptop then it is impossible to run all 3 applications. Literally I would need 3 machines all with the different GoLang versions to run those applications individually. Also I can purchase 3 different spaces on AWS to host these applications. This is where Docker comes in and solves this dilemma. Docker is kind of like a virtual machine. Where within my laptop I can run 3 virtual machines that each individually run my 3 GoLang projects. Instead, Docker has what they call containers.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; What is a container?&lt;/p&gt;
+
+&lt;p&gt;Unlike Virtual Machines, containers do not run operating systems. A container inherits necessary files from the operating system of its host (my laptop) and share the kernel. The containers are all seperated but live within the same storage (my laptop). Each of the containers can run different images for instance: Ubuntu, CentOS, Debian, and more. Within each other containers I can create environments specific to only that container. Whatever I install in one container will not affect my other containers.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; What is a docker file?&lt;/p&gt;
+
+&lt;p&gt;A Dockerfile is a document that contains all the commands to run to build an image for a container. For instance in the Dockerfile I would specify what Operating System I want, download PHP, download MySQL, and so on and so forth.&lt;/p&gt;
+
+&lt;p&gt;I hope this was helpful. To learn more about Docker you can &lt;a href=&quot;https://docker-curriculum.com/&quot;&gt;here&lt;/a&gt;. Hack on!&lt;/p&gt;</content><author><name></name></author><summary type="html"></summary></entry><entry><title type="html">Understanding Ansible Playbook’s</title><link href="http://localhost:4000/2020/10/15/blog6-jekyll.html" rel="alternate" type="text/html" title="Understanding Ansible Playbook’s" /><published>2020-10-15T07:00:00-07:00</published><updated>2020-10-15T07:00:00-07:00</updated><id>http://localhost:4000/2020/10/15/blog6-jekyll</id><content type="html" xml:base="http://localhost:4000/2020/10/15/blog6-jekyll.html">&lt;p&gt;For Lab 3 I need to create an Ansible Playbook that performs all the tasks done in Lab 1. To be quite honest, my realm of expertise is not automation or tools like this. I’m a Software Engineer and plan to grow down that path. Touching back on Ansible, I’ve never heard about such thing or understand at all. After doing some research I’m now more comfortable with Ansible. Below are some notes of my understanding on Ansible Playbook’s.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; What is an Ansible Playbook?&lt;/p&gt;
+
+&lt;p&gt;Playbooks are files where Ansible code is written. They have code that tells Ansible on what to execute. A playbook honestly reminds me of a docker file.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; Where are playbooks used for?&lt;/p&gt;
+
+&lt;p&gt;They are used for servers. The purpose of them is commonly for management/configuration on servers. For example with a playbook I can specify all the packages needed to be download on the server.&lt;/p&gt;
+
+&lt;p&gt;===&amp;gt; Sample ‘Hello World’ Ansible Playbook&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;name: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;A&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sample&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'Hello World'&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;playbook&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;hosts: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;web_server&lt;/span&gt;
+  &lt;span class=&quot;ss&quot;&gt;tasks:
+    &lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;name: &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;called&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'/tmp/helloworld.txt'&lt;/span&gt;
+      &lt;span class=&quot;ss&quot;&gt;copy:
+        content: &lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+        &lt;span class=&quot;ss&quot;&gt;dest: &lt;/span&gt;&lt;span class=&quot;sr&quot;&gt;/tmp/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;helloworld&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;txt&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;After running this playbook successfully, you should be able to run the following command: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cat /tmp/helloworld.txt&lt;/code&gt; and you should see:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@sample&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;# cat /tmp/helloworld.txt&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Hello&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;World&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Now, what do some of the keywords mean?
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;- name:&lt;/code&gt; basically is the name of the playbook (not the file).
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;hosts:&lt;/code&gt; is the hosts for the playbook.
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;tasks:&lt;/code&gt; all the tasks/commands to execute on the server&lt;/p&gt;
+
+&lt;p&gt;Hope this was helpful! Thank you and hack on! =)&lt;/p&gt;</content><author><name></name></author><summary type="html">For Lab 3 I need to create an Ansible Playbook that performs all the tasks done in Lab 1. To be quite honest, my realm of expertise is not automation or tools like this. I’m a Software Engineer and plan to grow down that path. Touching back on Ansible, I’ve never heard about such thing or understand at all. After doing some research I’m now more comfortable with Ansible. Below are some notes of my understanding on Ansible Playbook’s.</summary></entry></feed>

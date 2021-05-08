@@ -1,0 +1,16 @@
+---
+layout: post
+title: "Downloading packages in C# .NET"
+date: 2021-05-07 10:10:00 -0700
+---
+
+This week at work I was given a new project to build out an SSO to one of our internal applications. The Web API was already built out, however I needed to build out the functionality to be able to consume the API, request to SSO, and receive the URL. Since all our internal applications are built in C# .NET, I had to build out the SSO in C# .NET. This
+
+C# is something that I have barely touched throughout my 3-4 years of working in development so I had to learn on the fly and thankfully my job allows me the luxury to do so. 
+
+One of the cool things was downloading external packages to use within my C# program. Although almost every language has a package manager and takes one command to download a package, I'm not really used to that. I've mostly worked in Front End so I work with pure JavaScript and NPM. Download a project in JavaScript is something like `npm install {{packageName}}`. Therefore, going into something like a C# and seeing how easy it is to download packages was very soothing.
+
+All it takes is the following: `dotnet add package {{packageName}}`
+
+Then within your C# program you would specify using the package: `using {{packageName}};`
+
